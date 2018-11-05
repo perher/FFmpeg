@@ -99,6 +99,7 @@ const CodecTags ff_mkv_codec_tags[]={
     {"V_UNCOMPRESSED"   , AV_CODEC_ID_RAWVIDEO},
     {"V_VP8"            , AV_CODEC_ID_VP8},
     {"V_VP9"            , AV_CODEC_ID_VP9},
+    {"V_XVC"            , AV_CODEC_ID_XVC},
 
     {""                 , AV_CODEC_ID_NONE}
 };
