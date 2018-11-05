@@ -277,6 +277,7 @@ External library support:
   --enable-libxcb-shm      enable X11 grabbing shm communication [autodetect]
   --enable-libxcb-xfixes   enable X11 grabbing mouse rendering [autodetect]
   --enable-libxcb-shape    enable X11 grabbing shape rendering [autodetect]
+  --enable-libxvc          enable xvc de/encoding via libxvc [no]
   --enable-libxvid         enable Xvid encoding via xvidcore,
                            native MPEG-4/Xvid encoder exists [no]
   --enable-libxml2         enable XML parsing using the C library libxml2 [no]
@@ -1555,6 +1556,7 @@ EXTERNAL_LIBRARY_GPL_LIST="
     libx264
     libx265
     libxavs
+    libxvc
     libxvid
 "
 
@@ -2994,6 +2996,8 @@ libx264rgb_encoder_deps="libx264 x264_csp_bgr"
 libx264rgb_encoder_select="libx264_encoder"
 libx265_encoder_deps="libx265"
 libxavs_encoder_deps="libxavs"
+libxvc_decoder_deps="libxvc"
+libxvc_encoder_deps="libxvc"
 libxvid_encoder_deps="libxvid"
 libzvbi_teletext_decoder_deps="libzvbi"
 videotoolbox_extralibs="-framework CoreFoundation -framework VideoToolbox -framework CoreMedia -framework CoreVideo"
@@ -6036,6 +6040,14 @@ enabled libx264           && { use_pkg_config libx264 x264 "stdint.h x264.h" x26
 enabled libx265           && require_pkg_config libx265 x265 x265.h x265_api_get &&
                              require_cpp_condition x265.h "X265_BUILD >= 68"
 enabled libxavs           && require libxavs "stdint.h xavs.h" xavs_encoder_encode -lxavs
+enabled libxvc            && {
+    enabled libxvc_decoder && {
+        require_pkg_config libxvc xvc xvcdec.h xvc_decoder_api_get
+    }
+    enabled libxvc_encoder && {
+        require_pkg_config libxvc xvc xvcenc.h xvc_encoder_api_get
+    }
+}
 enabled libxvid           && require libxvid xvid.h xvid_global -lxvidcore
 enabled libzimg           && require_pkg_config libzimg "zimg >= 2.3.0" zimg.h zimg_get_api_version
 enabled libzmq            && require_pkg_config libzmq libzmq zmq.h zmq_ctx_new

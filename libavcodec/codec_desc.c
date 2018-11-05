@@ -1415,6 +1415,12 @@ static const AVCodecDescriptor codec_descriptors[] = {
         .type      = AVMEDIA_TYPE_VIDEO,
         .name      = "gdv",
         .long_name = NULL_IF_CONFIG_SMALL("Gremlin Digital Video"),
+    },
+    {
+        .id        = AV_CODEC_ID_XVC,
+        .type      = AVMEDIA_TYPE_VIDEO,
+        .name      = "xvc",
+        .long_name = NULL_IF_CONFIG_SMALL("XVC"),
         .props     = AV_CODEC_PROP_LOSSY,
     },
 
