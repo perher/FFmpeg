@@ -36,6 +36,7 @@ const AVCodecTag ff_mp4_obj_type[] = {
     { AV_CODEC_ID_MPEG4       , 0x20 },
     { AV_CODEC_ID_H264        , 0x21 },
     { AV_CODEC_ID_HEVC        , 0x23 },
+    { AV_CODEC_ID_XVC         , 0x25 },
     { AV_CODEC_ID_AAC         , 0x40 },
     { AV_CODEC_ID_MP4ALS      , 0x40 }, /* 14496-3 ALS */
     { AV_CODEC_ID_MPEG2VIDEO  , 0x61 }, /* MPEG-2 Main */
@@ -163,6 +164,8 @@ const AVCodecTag ff_codec_movvideo_tags[] = {
 
     { AV_CODEC_ID_HEVC, MKTAG('h', 'e', 'v', '1') }, /* HEVC/H.265 which indicates parameter sets may be in ES */
     { AV_CODEC_ID_HEVC, MKTAG('h', 'v', 'c', '1') }, /* HEVC/H.265 which indicates parameter sets shall not be in ES */
+
+    { AV_CODEC_ID_XVC, MKTAG('x', 'v', 'c', '1') }, /* XVC */
 
     { AV_CODEC_ID_H264, MKTAG('a', 'v', 'c', '1') }, /* AVC-1/H.264 */
     { AV_CODEC_ID_H264, MKTAG('a', 'v', 'c', '2') },

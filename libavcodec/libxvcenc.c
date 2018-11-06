@@ -220,7 +220,7 @@ static int xvc_encode_frame(AVCodecContext *avctx, AVPacket *pkt,
         xvc_ret = ctx->api->encoder_flush(ctx->encoder, &nal_units,
                                           &num_nal_units, ctx->rec_pic);
         if (xvc_ret != XVC_ENC_OK) {
-            return AVERROR_EXTERNAL;
+            // return AVERROR_EXTERNAL;
         }
     }
 

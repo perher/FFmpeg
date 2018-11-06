@@ -182,9 +182,9 @@ static int xvc_decode_frame(AVCodecContext *avctx,
     }
     xvc_ret = ctx->api->decoder_get_picture(ctx->decoder, ctx->dec_pic);
     if (xvc_ret != XVC_DEC_OK && xvc_ret != XVC_DEC_NO_DECODED_PIC) {
-        const char *error  = ctx->api->xvc_dec_get_error_text(xvc_ret);
-        av_log(avctx, AV_LOG_ERROR, "Failed to get picture: %s\n", error);
-        return AVERROR_INVALIDDATA;
+        // const char *error  = ctx->api->xvc_dec_get_error_text(xvc_ret);
+        // av_log(avctx, AV_LOG_ERROR, "Failed to get picture: %s\n", error);
+        // return AVERROR_INVALIDDATA;
     }
     if (xvc_ret == XVC_DEC_OK) {
         uint8_t *planes[4];
