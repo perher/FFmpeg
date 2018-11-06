@@ -1188,6 +1188,15 @@ static int mov_write_hvcc_tag(AVIOContext *pb, MOVTrack *track)
     return update_size(pb, pos);
 }
 
+static int mov_write_xvc_tag(AVIOContext *pb, MOVTrack *track)
+{
+    int64_t pos = avio_tell(pb);
+
+    avio_wb32(pb, 0);
+    ffio_wfourcc(pb, "xvcC");
+    return update_size(pb, pos);
+}
+
 /* also used by all avid codecs (dv, imx, meridien) and their variants */
 static int mov_write_avid_tag(AVIOContext *pb, MOVTrack *track)
 {
@@ -1993,6 +2002,8 @@ static int mov_write_video_tag(AVIOContext *pb, MOVMuxContext *mov, MOVTrack *tr
         avid = 1;
     } else if (track->par->codec_id == AV_CODEC_ID_HEVC)
         mov_write_hvcc_tag(pb, track);
+    else if (track->par->codec_id == AV_CODEC_ID_XVC)
+        mov_write_xvc_tag(pb, track);
     else if (track->par->codec_id == AV_CODEC_ID_H264 && !TAG_IS_AVCI(track->tag)) {
         mov_write_avcc_tag(pb, track);
         if (track->mode == MODE_IPOD)
@@ -6662,6 +6673,7 @@ const AVCodecTag codec_mp4_tags[] = {
     { AV_CODEC_ID_H264        , MKTAG('a', 'v', 'c', '3') },
     { AV_CODEC_ID_HEVC        , MKTAG('h', 'e', 'v', '1') },
     { AV_CODEC_ID_HEVC        , MKTAG('h', 'v', 'c', '1') },
+    { AV_CODEC_ID_XVC         , MKTAG('x', 'v', 'c', '1') },
     { AV_CODEC_ID_MPEG2VIDEO  , MKTAG('m', 'p', '4', 'v') },
     { AV_CODEC_ID_MPEG1VIDEO  , MKTAG('m', 'p', '4', 'v') },
     { AV_CODEC_ID_MJPEG       , MKTAG('m', 'p', '4', 'v') },
