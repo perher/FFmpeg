@@ -44,6 +44,7 @@ typedef struct libxvcEncoderContext {
     int num_ref_pics;
     int internal_bitdepth;
     int sub_gop_length;
+    int deblock;
     char *explicit_encoder_settings;
 } libxvcEncoderContext;
 
@@ -162,6 +163,9 @@ static av_cold int xvc_encode_init(AVCodecContext *avctx)
     }
     if (ctx->sub_gop_length >= 0) {
         ctx->params->sub_gop_length = ctx->sub_gop_length;
+    }
+    if (ctx->deblock >= 0) {
+        ctx->params->deblock = ctx->deblock;
     }
     if (ctx->explicit_encoder_settings) {
         ctx->params->explicit_encoder_settings = ctx->explicit_encoder_settings;
@@ -304,6 +308,7 @@ static const AVOption options[] = {
     { "num-ref-pics",           "number of reference pictures",                          OFFSET(num_ref_pics),  AV_OPT_TYPE_INT,  {.i64 = -1}, -1, INT_MAX, VE },
     { "internal-bitdepth",      "internal bitdepth",                                     OFFSET(internal_bitdepth),  AV_OPT_TYPE_INT,  {.i64 = -1}, -1, 16, VE },
     { "sub-gop-length",         "sub-gop length",                                        OFFSET(sub_gop_length),  AV_OPT_TYPE_INT,  {.i64 = -1}, -1, 64, VE },
+    { "deblock",                "deblocking mode",                                       OFFSET(deblock), AV_OPT_TYPE_INT,  {.i64 = -1}, -1, 2, VE },
     { "explicit-encoder-settings", "explicit xvc encoder settings",                      OFFSET(explicit_encoder_settings),  AV_OPT_TYPE_STRING, { 0 }, 0, 0, VE },
     { NULL }
 };
